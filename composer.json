@@ -10,8 +10,8 @@
     "license": "MIT",
     "repositories": [
         {
-            "type": "path",
-            "url": "../job-shared"
+            "type": "vcs",
+            "url": "https://github.com/ahmedibra24/job_shared_sha8lni.git"
         }
     ],
     "require": {
@@ -101,3 +101,4 @@
     "minimum-stability": "dev",
     "prefer-stable": true
 }
+
