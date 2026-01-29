@@ -49,10 +49,13 @@ class jobVacancyController extends Controller
          $originalFileName= $file->getClientOriginalName();//? use to store in database
          $fileName= 'resume_' . time() . '.' . $extension;//? name that store in cloud should be unique to avoid override files
    
-         //! store in laravel cloud
+         //! store in cloud
          //? resumes-> the name of folder on cloud
          //? cloud-> place you will store the file - its cloud by default when you edit it in .env file FILESYSTEM_DISK=cloud 
-         $path=$file->storeAs('resumes',$fileName,'cloud');
+         $path=$file->storeAs('resumes',$fileName,'cloud',[
+            'disk'=>'cloud',
+            'visibility' => 'public'
+         ]);
          $fileUrl = config('filesystems.disks.cloud.url').'/'.$path ;//? final url to display the file from cloud
 
          //! extracted info by ai
