@@ -2,7 +2,6 @@
 FROM dunglas/frankenphp
 
 # Install system dependencies
-# poppler-utils to install pdf-to-text on wsl
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -11,7 +10,7 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     zip \
     unzip \
-    poppler-utils \ 
+    poppler-utils \
     default-mysql-client \
     && rm -rf /var/lib/apt/lists/*
 
@@ -20,11 +19,10 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
     apt-get install -y nodejs
 
 # Install PHP extensions
-# mysqli -> give you access or interaction to mysql
 RUN install-php-extensions \
     pdo_mysql \
     mysqli
-
+    
 # Install Composer like installation you made locally on windows
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
@@ -35,8 +33,7 @@ WORKDIR /app
 COPY composer.json composer.lock ./
 
 # Install Composer dependencies
-RUN composer install --no-scripts --no-autoloader
-
+RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
 # Copy package files
 COPY package.json package-lock.json ./
 
@@ -61,9 +58,13 @@ RUN chown -R www-data:www-data /app/storage /app/bootstrap/cache
 # Copy Caddyfile (configuration for http server)
 COPY Caddyfile /etc/caddy/Caddyfile
 
+# Copy entrypoint
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+
 # Expose ports
 EXPOSE 80
 EXPOSE 443
 
-# Start FrankenPHP
-CMD ["frankenphp", "run", "--config", "/etc/caddy/Caddyfile"] 
+CMD ["/entrypoint.sh"]
