@@ -33,7 +33,7 @@ WORKDIR /app
 COPY composer.json composer.lock ./
 
 # Install Composer dependencies
-RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
+RUN composer install --no-dev --no-scripts --optimize-autoloader --no-interaction --prefer-dist
 # Copy package files
 COPY package.json package-lock.json ./
 
