@@ -13,7 +13,6 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="bg-black/90 border border-white/10 rounded-2xl p-6 md:p-8">
                 <div class="mx-auto max-w-6xl space-y-6 px-4 sm:px-6 lg:px-8">
-                    {{-- Example application card (replace with a @foreach over user applications) --}}
                     @forelse($applications as $application)
                         <div class="rounded-2xl bg-slate-900/70 ring-1 ring-slate-800 shadow-xl">
                         <div class="p-6 sm:p-8">
