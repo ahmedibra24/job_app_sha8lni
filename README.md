@@ -1,9 +1,13 @@
 <p align="center">
-  <img src="./assets/images/logo.png" width="150" />
+  <img src="./public/images/logo.png" width="150" />
 </p>
+
+
 # 🤖 AI-Powered Job Portal
 
 A modern recruitment platform that connects companies with job seekers, featuring intelligent CV analysis and candidate evaluation using AI.
+
+
 
 ---
 
